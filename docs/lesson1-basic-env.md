@@ -8,7 +8,7 @@
 
 GOPATH目录下建立 `bin pkg src`目三个录
 
-命令行cd到`$GOPATH/src/`或`cd %GOPATH%\src\`
+命令行`cd $GOPATH/src/`或`cd %GOPATH%\src\`
 
 新建并进入到helloword目录`mkdir helloword && cd helloword`
 
