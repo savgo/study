@@ -11,3 +11,5 @@ go lang study
 [GO内置包](docs/lesson4-buildin-packages.md)
 
 [GO包管理](docs/lesson5-package-managers.md)
+
+[GO工程化](docs/lesson6-project-standard.md)
