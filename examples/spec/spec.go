@@ -66,10 +66,10 @@ func builtinType() {
   
   // 2.4 复数类型 ComplexType (参考C语言中的Complex复数类型和imaginary虚数类型)
   println("复数类型")
-  // 32位复数
+  // 32位浮点数+虚数组成
   var v15 complex64
   println("complex64", v15)
-  // 64位复数
+  // 64位浮点数+虚数组成
   var v16 complex128
   println("complex128", v16)
 
@@ -131,6 +131,9 @@ func builtinValue () {
   // var x func = nil // @TODO useage, 语法错误
   var null interface{} = nil
   println("空值变量", "interface", null)
+
+  var i *int = nil
+  println("空值变量", "pointer", i)
 
   // error类型
   var err error = nil
@@ -221,5 +224,10 @@ func main() {
   declareVar() // 变量的声明及赋值
   declareConst() // 常量的声明及赋值
   // 运算
-  // 
+  // p1 := 5
+  // p2 := p1
+  // p2 += p1*1223372036854775807
+  // var x int64 = int64(p2)
+  // m := 2.3
+  // println(p1, p2, x, m)
 }

@@ -1,6 +1,5 @@
 package main
 
 func main() {
-  var b nil
-  print(b)
+  print("Hello World")
 }
