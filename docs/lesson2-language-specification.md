@@ -2,7 +2,7 @@
 
 ## 内置基本数据类型
 
-1. 布尔类型
+### 布尔类型
 
 > 布尔值只有`true`和`false`
 
@@ -10,7 +10,7 @@
 var v1 bool
 ```
 
-2. 整形 IntegerType
+### 整形 IntegerType
 
 ```go
   var v2 uint8   // Range: 0 through 255.
@@ -36,14 +36,14 @@ var v1 bool
   - [ ] byte 用途
   - [ ] rune 用途
 
-3. 浮点类型 FloatType
+### 浮点类型 FloatType
 
 ```go
   var v13 float32  // 32位浮点数
   var v14 float64  // 64位浮点数
 ```
 
-4. 复数类型 ComplexType
+### 复数类型 ComplexType
 
 > 备注
 
@@ -54,7 +54,7 @@ var v1 bool
   var v16 complex128 // 64位浮点数+虚数组成
 ```
 
-5. 字符串类型 string
+### 字符串类型 string
 
 > 备注
 
@@ -64,19 +64,19 @@ var v1 bool
   var v17 string
 ```
 
-6. 指针类型
+### 指针类型
 
 ```go
   var v18 uintptr
 ```
 
-7. interface类型
+### interface类型
 
 ```go
   var v20 interface{}
 ```
 
-8. error类型
+### error类型
 
 > 备注
 
@@ -86,19 +86,19 @@ var v1 bool
   var v21 error
 ```
 
-9. 数组类型 slice
+### 数组类型 slice
 
 ```go
   var v22 []int
 ```
 
-10. 图类型 map
+### 图类型 map
 
 ```go
   var v23 map[string]int
 ```
 
-11. channel管道类型
+### channel管道类型
 
 ```go
   var v24 chan <- int
@@ -106,7 +106,7 @@ var v1 bool
 
 ## 内置常量和变量
 
-1. 布尔常量 true 和 false
+### 布尔常量 true 和 false
 
 > 备注
 
@@ -118,7 +118,7 @@ var v1 bool
 
   1. [ ] 什么是字面量?
 
-2. iota常量
+### iota常量
 
 > 备注
 
@@ -132,7 +132,7 @@ var v1 bool
 > 参考
  - [golang 使用 iota](https://studygolang.com/articles/2192)
 
-3. 空值nil
+### 空值nil
 
 > 备注
 
@@ -158,7 +158,7 @@ var v1 bool
 
 ## 变量的声明
 
-1. 单个变量的声明
+### 单个变量的声明
 
 ```go
   var v1 int     // 1.1 声明一个变量, 使用默认值
@@ -166,7 +166,7 @@ var v1 bool
   var v3 = "s"   // 1.3 声明一个变量, 自动推导数据类型
 ```
 
-2. 声明多个变量
+### 声明多个变量
 
 ```go
   var m1, m2 int        // 2.1 声明多个同数据类型的变量
@@ -176,7 +176,7 @@ var v1 bool
   // var x1 int, x2 int // @ERROR 不允许显式声明一组不同数据类型的变量
 ```
 
-3. 因式分解法声明变量
+### 因式分解法声明变量
 
 > 备注
 
@@ -191,7 +191,7 @@ var v1 bool
   var (n14 = 3; n15 = .8)       // 3.6 声明多个推导变量
 ```
 
-4. 推导声明赋值
+### 推导声明赋值
 
 > 备注
 
@@ -207,7 +207,6 @@ var v1 bool
 
   1. [ ] 推导类型是什么数据类型(整形是int, 其他未测试)
 
-
 ## 常量的声明
 
 > 备注
@@ -215,7 +214,7 @@ var v1 bool
   1. 常量的声明必须初始化赋值
   2. 常量不能推导声明赋值
 
-1. 单个常量的声明
+### 单个常量的声明
 
 ```go
   const v2 int = 2 // 1.1 声明并初始化赋值
@@ -224,14 +223,14 @@ var v1 bool
   // const x // @ERROR 不允许这样写的, 因为无法推导数据类型
 ```
 
-2. 声明多个常量
+### 声明多个常量
 
 ```go
   const m3, m4 int = 2, 8   // 2.1 声明多个同数据类型的常量, 并初始化赋值
   const m5, m6 = "s", 8     // 2.2 声明多个自动推导类型的常量, 必须初始化赋值
 ```
 
-3. 因式分解法声明常量
+### 因式分解法声明常量
 
 ```go
   const (n8 int = 1)    // 3.1 声明单个常量并赋值
