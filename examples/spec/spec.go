@@ -120,13 +120,13 @@ func builtinValue () {
   // var x = iota // undefined: iota
   const initV = iota
   println("初始常量", "iota", initV)
-  // @useage golang 使用 iota
-  // @see https://studygolang.com/articles/2192
+  // @USEAGE golang 使用 iota
+  // @SEE https://studygolang.com/articles/2192
   
   // 空值nil是作为变量值存在的, 除非特别指定，否则无法使用 nil 对变量赋值
   // 空值nil, 可以作为以下数据类型的值 pointer, channel, func, interface, map, slice
-  // var x string = nil // 字符串不能为nil  cannot use nil as type string in assignment
-  // var x = nil // 没有特别指定类型, 无法识别 use of untyped nil
+  // var x string = nil // @ERROR 字符串不能为nil  cannot use nil as type string in assignment
+  // var x = nil // @ERROR 没有特别指定类型, 无法识别 use of untyped nil
   // var x uintptr = nil // @TODO useage, cannot use nil as type uintptr in assignment
   // var x func = nil // @TODO useage, 语法错误
   var null interface{} = nil
@@ -146,8 +146,80 @@ func builtinValue () {
   println("空值变量", "chan", c1)
 }
 
+func declareVar() {
+  println("变量的声明")
+  // 1. 声明变量
+  var v1 int // 1.1 声明一个变量, 使用默认值
+  println("声明变量", "int", v1)
+  var v2 int = 2 // 1.2 声明并初始化赋值
+  println("声明变量", "int", v2)
+  var v3 = "s" // 1.3 声明一个变量, 自动推导数据类型
+  // var x // @ERROR 不允许这样写的, 因为无法推导数据类型
+  println("声明变量", "auto", v3)
+  var v4 = 5 // @QUESTING v4 如何检测是什么数据类型?
+  println("声明变量", "auto", v4)
+  // 2. 声明多个变量
+  var m1, m2 int // 2.1 声明多个同数据类型的变量
+  println("声明变量", "m1", m1, "m2", m2)
+  // var x1 int, x2 int // @ERROR 不允许显式声明一组不同数据类型的变量
+  var m3, m4 int = 2, 8 // 2.2 声明多个同数据类型的变量, 并初始化赋值
+  println("声明变量", "m3", m3, "m4", m4)
+  var m5, m6 = "s", 8 // 2.3 声明多个自动推导类型的变量, 必须初始化赋值
+  println("声明变量", "m5", m5, "m6", m6)
+  // 3. 因式分解法声明变量
+  var (n7 int) // 3.1 声明单个变量
+  println("声明变量", "n7", n7)
+  var (n8 int = 1) // 3.2 声明单个变量并赋值
+  println("声明变量", "n8", n8)
+  var (n9 = 1) // 3.3 声明单个推导变量
+  println("声明变量", "n9", n9)
+  var (n10 int; n11 float32) // 3.4 声明多个变量 , 需要使用分号或换行分割
+  println("声明变量", "n10", n10, "n11", n11)
+  var (n12 int = 3; n13 float32 = .8) // 3.5 声明多个变量, 并初始化赋值
+  println("声明变量", "n12", n12, "n13", n13)
+  var (n14 = 3; n15 = .8) // 3.6 声明多个推导变量
+  println("声明变量", "n14", n14, "n15", n15)
+  // 4. 推导声明赋值(或者叫auto声明) @NOTE 只能在函数体中出现
+  p1 := 5 // 4.1 单个推导声明赋值, 不能指定类型
+  println("声明变量", "p1", p1)
+  p2, p3 := 3, 8 // 4.2 多个推导声明赋值
+  println("声明变量", "p2", p2, "p3", p3)
+}
+
+func declareConst() {
+  println("常量的声明")
+  // @NOTE 常量的声明必须初始化赋值
+  // @NOTE 常量不能推导声明赋值
+  // 1. 声明常量
+  const v2 int = 2 // 1.1 声明并初始化赋值
+  println("声明常量", "int", v2)
+  const v3 = "s" // 1.2 声明一个常量, 自动推导数据类型
+  // const x // @ERROR 不允许这样写的, 因为无法推导数据类型
+  println("声明常量", "auto", v3)
+  const v4 = 5 // @QUESTING v4 如何检测是什么数据类型?
+  println("声明常量", "auto", v4)
+  // 2. 声明多个常量
+  const m3, m4 int = 2, 8 // 2.1 声明多个同数据类型的常量, 并初始化赋值
+  println("声明常量", "m3", m3, "m4", m4)
+  const m5, m6 = "s", 8 // 2.2 声明多个自动推导类型的常量, 必须初始化赋值
+  println("声明常量", "m5", m5, "m6", m6)
+  // 3. 因式分解法声明常量
+  const (n8 int = 1) // 3.1 声明单个常量并赋值
+  println("声明常量", "n8", n8)
+  const (n9 = 1) // 3.2 声明单个推导常量
+  println("声明常量", "n9", n9)
+  const (n12 int = 3; n13 float32 = .8) // 3.3 声明多个常量, 并初始化赋值
+  println("声明常量", "n12", n12, "n13", n13)
+  const (n14 = 3; n15 = .8) // 3.4 声明多个推导常量
+  println("声明常量", "n14", n14, "n15", n15)
+}
+
 func main() {
   noop() // 函数的最简定义
   builtinType() // 内置基本数据类型
   builtinValue() // 内置常量和变量
+  declareVar() // 变量的声明及赋值
+  declareConst() // 常量的声明及赋值
+  // 运算
+  // 
 }
