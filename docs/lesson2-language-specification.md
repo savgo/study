@@ -266,7 +266,7 @@ var v1 bool
     // skip
   } else if y { // 变量
     // skip
-  } else if x < int(y) { // 表达式
+  } else if x < 0 { // 表达式
     // skip
   } else if n := x; n < 0 { // 初始语句可以是 推导声明
     // skip
