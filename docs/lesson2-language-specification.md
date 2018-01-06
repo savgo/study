@@ -191,7 +191,7 @@ var v1 bool
   var (n14 = 3; n15 = .8)       // 3.6 声明多个推导变量
 ```
 
-### 推导声明赋值
+### 推导声明
 
 > 备注
 
@@ -199,8 +199,8 @@ var v1 bool
   2. Go语言从不做隐式转换
 
 ```go
-  p1 := 5           // 4.1 单个推导声明赋值, 不能指定类型
-  p2, p3 := 3, 8    // 4.2 多个推导声明赋值
+  p1 := 5           // 4.1 单个推导声明赋值, 不能指定
+  p2, p3 := 3, 8    // 4.2 多个推导声明
 ```
 
 > 问题
@@ -212,7 +212,7 @@ var v1 bool
 > 备注
 
   1. 常量的声明必须初始化赋值
-  2. 常量不能推导声明赋值
+  2. 常量不能推导声明
 
 ### 单个常量的声明
 
@@ -237,4 +237,97 @@ var v1 bool
   const (n9 = 1)        // 3.2 声明单个推导常量
   const (n12 int = 3; n13 float32 = .8)     // 3.3 声明多个常量, 并初始化赋值
   const (n14 = 3; n15 = .8)     // 3.4 声明多个推导常量
+```
+
+## 控制结构
+
+### if 语句
+
+> 语法
+
+`if [init]; condation {`
+
+`[} else [if [init]; condation] {]`
+
+
+> 备注
+
+  1. if语句 只接收bool类型的常量, 变量或表达式
+  2. 关键字和花括号必须在一行, 除非在初始语句换行(不推荐)
+
+```go
+  var x int = 10
+  var y = false
+  if false { // 常量
+    // skip
+  } else if y { // 变量
+    // skip
+  } else if x < int(y) { // 表达式
+    // skip
+  } else if n := x; n < 0 { // 初始语句可以是 推导声明
+    // skip
+  } else if m, n := 0, 1; // 初始语句换行
+  m > n {                 // 多个推导声明
+    // skip
+  } else if false && true { // 表达式
+    // skip
+  } else { // 也可以没有 else
+    println("if")
+  }
+```
+
+### switch 语句
+
+> 语法
+
+`switch [condation] {`
+
+`case condation : [body][fallthrough]`
+
+`[default : {]`
+
+> 备注
+
+  1. switch语句设计的比较灵活
+  2. switch参数可以是常量, 变量, 表达式, 或省略(参数为bool类型的true值)
+  3. case参数可以是常量, 变量, 表达式, 参数类型需要和switch参数值类型一致
+  4. switch参数可以是 推导声明语句, 此时case参数类型为bool
+  5. case可以带多个参数, 用逗号隔开
+  6. switch语句命中则不继续匹配, 除非用`fallthrough`关键字
+
+```go
+  var m int = 0
+  var n int = -1
+  switch m { // switch参数为 int类型变量, case 参数类型相同
+    case -1 : // 常量 空的 case 体
+    case n : return // 变量 可以用 return 返回函数值
+    case n - 1 : println("skip") // 表达式
+    case 'a', n - 2 : println("skip") // 可以匹配多项, 用逗号隔开
+    case n + 1 : println("m = -1 + 1") // 匹配执行
+      fallthrough // 不跳出, 继续匹配
+    case 0 : println("m = 1")
+    default : // 可省略
+  }
+
+  switch 1 { // 常量
+    case 0: println("skip")
+  }
+
+  switch { // 省略 相当于 switch true
+    case false: println("skip")
+  }
+
+  switch m + 1 { // 表达式
+    case -1: println("skip")
+  }
+
+  switch x := m; { // 推导声明语句, case参数为bool
+    case x > 0: println("skip")
+    case x < 0: println("skip")
+  }
+
+  switch x, y := m, n; { // 推导声明语句, case参数为bool
+    case x < y : println("skip")
+    case x == y : println("skip")
+  }
 ```
