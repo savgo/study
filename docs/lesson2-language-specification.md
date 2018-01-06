@@ -86,13 +86,13 @@ var v1 bool
   var v21 error
 ```
 
-### 数组类型 slice
+### slice类型 (切片, 可以理解为动态数组)
 
 ```go
   var v22 []int
 ```
 
-### 图类型 map
+### map型
 
 ```go
   var v23 map[string]int
@@ -329,5 +329,117 @@ var v1 bool
   switch x, y := m, n; { // 推导声明语句, case参数为bool
     case x < y : println("skip")
     case x == y : println("skip")
+  }
+```
+
+### for 语句
+
+> 语法
+
+`for [init]; condation; [post] {`
+
+`}`
+
+`for [condation] {`
+
+`}`
+
+> 备注
+
+  1. go语言没有while语句
+  2. for语句可以通过标签方便跳出嵌套循环
+  3. 请尽可能忘掉标签和goto语句
+
+```go
+  // 常规的for循环
+  for i:= 0; i < 10; i++ {
+    if i < 5 {
+      continue
+    }
+    println("for i", i)
+    if i > 4 {
+      break
+    }
+  }
+  var i = 0
+  for ; i < 2; i++ { // 省略 init
+  }
+  for j := 0; j < 2; { // 省略 post
+    j++
+  }
+  for ; i < 3; { // 省略 init 和 post
+    i++
+  }
+  for i < 4 { // 只有表达式, 类似 while () {}
+    i++
+  }
+  for { // 无限循环 类似 for(;;) {} 或 while (true){}
+    break
+  }
+
+  var v = 0;
+  // 再for关键字前定义 循环标签 loopFor
+  loopFor: for i :=0; i < 5; i++ {
+    v++
+    for j := 0; j < 5; j++ {
+      v++
+      for k := 0; k < 5; k++ {
+        v++
+        if k > j {
+          break loopFor // 跳出 父级循环标签, 不要妄想跳到其他地方去
+        }
+      }
+    }
+  }
+  println("break loopFor:", v)
+
+```
+
+### for range 语句
+
+> 语法
+
+`for condation range condation {`
+
+`}`
+
+> 备注
+
+  1. range迭代器可以用在 array, slice, map, string, channel等类型
+
+```go
+  // array迭代
+  for id, val := range [2]string{"a", "b"} {
+    if id < 0 {
+      println("skip", id, val)
+    }
+  }
+  // slice迭代
+  for id, val := range []string{"a", "b"} {
+    if id < 0 {
+      println("skip", id, val)
+    }
+  }
+  // map迭代
+  for key, val := range map[string]int{"a": 1, "b": 2} {
+    if val < 0 {
+      println("skip", key, val)
+    }
+  }
+  // string迭代
+  for id, char := range "abcd" {
+    if id < 0 {
+      println("skip", id, char)
+    }
+  }
+  // channel迭代
+  c := make(chan int)
+  go func (c chan int) { // 简单的协程和闭包
+    c <- 1
+    c <- 2
+    close(c)
+  }(c) // 虽然func定义可以用()包裹, 看起来会更像闭包, 何如
+  for val := range c {
+    println("get:", val)
   }
 ```
