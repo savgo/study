@@ -86,13 +86,17 @@ var v1 bool
   var v21 error
 ```
 
-### slice类型 (切片, 可以理解为动态数组)
+### slice类型
+
+> 备注
+
+  1. 切片, 可以理解为动态数组
 
 ```go
   var v22 []int
 ```
 
-### map型
+### map类型
 
 ```go
   var v23 map[string]int
