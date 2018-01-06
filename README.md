@@ -1,6 +1,6 @@
 # study
 
-go lang study
+不学则已, 学则死磕
 
 [GO基础环境](docs/lesson1-basic-env.md)
 
