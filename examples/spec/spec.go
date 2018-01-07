@@ -412,6 +412,36 @@ loopFor:
 
 }
 
+func operationExpression() {
+	// bool 逻辑清晰的可以不用分组
+	println("bool", !true && 3 > 4 || 4 > 3)
+	// int 程序员的梦(魇)
+	println("int", 1 + 2 * 3 ^ 5 >> 1 & 4 | 7)
+	// string 字符串拼接而非运算
+	println("string", "str" + "ing")
+	// 下标运算
+	println("string[]", "str"[0]) // 取出来的值是byte
+	println("array[]", [...]int{2, 3}[0]) // 数组可以使用...让编译器判断长度
+	println("slice[]", []int{1,2}[0])
+	println("map[]", map[int]string{1: "s"}[1])
+	// 指针运算
+	var n1 int
+	var p1 *int = &n1
+	var pp1 **int = &p1
+	*p1++  	// n1++
+	**pp1++ // n1++
+	println("n1", n1)
+	// 管道运算
+	ch := make(chan int)
+	var send chan <- int = ch // 定义一个发送者
+	var recv <- chan int = ch // 定义一个接受者
+	go func () {
+		send <- 1 // 或使用 ch <- 1
+		close(ch)
+	}()
+	println("cha", <- recv) // 取出, 或使用 <- ch
+}
+
 func keyWord() {
 
 }
@@ -423,6 +453,7 @@ func main() {
 	declareVar()        // 变量的声明及赋值
 	declareConst()      // 常量的声明及赋值
 	controlStructures() // 控制结构
+	operationExpression() // 运算
 	keyWord()           // 保留字,关键字
 	// 内置函数
 	// 运算符和表达式
@@ -433,4 +464,6 @@ func main() {
 	// var x int64 = int64(p2)
 	// m := 2.3
 	// println(p1, p2, x, m)
+	a := 2 < 3 || 3 > 2 && 1 < 2
+	println(a)
 }
