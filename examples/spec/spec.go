@@ -456,7 +456,6 @@ func main() {
 	operationExpression() // 运算
 	keyWord()           // 保留字,关键字
 	// 内置函数
-	// 运算符和表达式
 	// 函数
 	// p1 := 5
 	// p2 := p1
